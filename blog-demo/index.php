@@ -8,4 +8,5 @@ if (!$conn) die ('Problem connecting to the database');
 //fetch all the posts
 $posts = Database\get('posts', $conn);
 //filter through and display
-include 'index.view.php';
+$view_path = 'views/index.view.php';
+include 'views/layout.php';
