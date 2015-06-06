@@ -1,50 +1,10 @@
-<?php namespace blog_demo\Database;
+<?php
 
-$config = array(
-	'username' => 'root',
-	'password' => 'root',
-	'db_name'  => 'blogdemo'
-);
-
-function connect($config)
+function view($path, $data = null)
 {
-	try
+	if ($data) 
 	{
-		$conn = new \PDO('mysql:host=localhost;dbname=' . $config['db_name'],
-		 $config['username'],
-		 $config['password']);
-
-		$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
-		return $conn;
-	} 
-	catch(Exception $e)  
-	{
-		return false;
+		extract($data);
 	}
-}
-
-function query($query, $bindings, $conn)
-{
-	$stmt = $conn->prepare($query);
-	$stmt->execute($bindings);
-
-	$results = $stmt->fetchAll();
-	return $results ? $results : false;
-}
-
-function get($tableName, $conn, $limit = 10)
-{
-	try
-	{
-		$result = $conn->query("SELECT * FROM $tableName LIMIT $limit");
-
-		return ($result->rowCount() > 0 )
-			? $result
-			: false;
-	} 
-	catch(Exception $e)
-	{
-		return false;
-	}
+	include "views/{$path}.view.php";
 }

@@ -1,12 +1,12 @@
 <?php 
-require 'functions.php';
+
+require 'blog.php';
 use blog_demo\Database; 
 
-$conn = Database\connect($config);
-
-if (!$conn) die ('Problem connecting to the database');
 //fetch all the posts
 $posts = Database\get('posts', $conn);
-//filter through and display
-$view_path = 'views/index.view.php';
-include 'views/layout.php';
+
+view('index', array(
+	'posts' => $posts,
+	'name'  => 'John Doe'
+));

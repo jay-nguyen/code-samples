@@ -1,4 +1,4 @@
-<h1>The Posts</h1>
+<h1>The Posts by <?= $name; ?></h1>
 	<?php foreach ($posts as $post) : ?>
 		<article>
 			<div class="page-header">
